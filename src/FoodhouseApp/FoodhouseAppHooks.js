@@ -1,10 +1,19 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { fetchFoodhouseSetupStatus } from "../services/foodhouseServices";
 
 function useFoodhouseInit() {
 
     const [ shouldInitialized, setShouldInitialized ] = useState(false);
     const navigation = useNavigate();
+
+    useEffect(() => {
+        fetchFoodhouseSetupStatus()
+            .then(foodhouseSetupStatus => {
+                const {setupCompleted} = foodhouseSetupStatus;
+                setShouldInitialized(!setupCompleted);
+            });
+    }, []);
 
     useEffect(() => {
         if (shouldInitialized) {
@@ -37,7 +46,7 @@ function useUserAuthenticated(shouldInitialized) {
         } else {
             navigation('/');
         }
-    }, [navigation, shouldInitialized.shouldInitialized, userIsAuthenticated]);
+    }, [ navigation, shouldInitialized.shouldInitialized, userIsAuthenticated ]);
 
     useEffect(() => {
         const authToken = window.localStorage.getItem('auth-token');
@@ -47,7 +56,7 @@ function useUserAuthenticated(shouldInitialized) {
 
     useEffect(() => {
         redirectUser();
-    }, [redirectUser, userIsAuthenticated]);
+    }, [ redirectUser, userIsAuthenticated ]);
 
     return {
         userIsAuthenticated
