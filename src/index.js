@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import FoodhouseDashboardApp from './FoodhouseDashboardApp';
 import reportWebVitals from './reportWebVitals';
-import './theme/foodhouse-dashboard.scss';
-import FoodhouseDashboardApp from "./FoodhouseDashboardApp";
 import { BrowserRouter } from "react-router-dom";
+import './index.css';
 
 ReactDOM.render(
     <React.StrictMode>

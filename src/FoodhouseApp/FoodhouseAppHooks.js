@@ -63,7 +63,24 @@ function useUserAuthenticated(shouldInitialized) {
     };
 }
 
+function useUIStateManagement() {
+    const [ showFetchingBackdrop, setFetchingBackdrop ] = useState(false);
+    const [ fetchErrorMessage, setFetchErrorMessage] = useState( {
+        visible: false,
+        title: null,
+        description: null
+    });
+
+    return {
+        showFetchingBackdrop,
+        setFetchingBackdrop,
+        fetchErrorMessage,
+        setFetchErrorMessage
+    };
+}
+
 export {
     useFoodhouseInit,
-    useUserAuthenticated
+    useUserAuthenticated,
+    useUIStateManagement
 }

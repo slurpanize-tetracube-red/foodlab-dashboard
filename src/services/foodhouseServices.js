@@ -1,5 +1,5 @@
-import { foodhouseConfiguration } from "../FoodhouseConfiguration";
 import axios from "axios";
+import { foodhouseConfiguration } from "../FoodhouseConfiduration";
 
 async function fetchFoodhouseSetupStatus() {
     const url = `${foodhouseConfiguration.apiBaseUrl}/foodhouse/setup/status`;
@@ -7,6 +7,25 @@ async function fetchFoodhouseSetupStatus() {
     return setupStatusResponse.data
 }
 
+async function saveFoodhouse(formData) {
+    const url = `${foodhouseConfiguration.apiBaseUrl}/foodhouse/setup/create`;
+    const setupStatusResponse = await axios.post(url, formData);
+    return setupStatusResponse.data
+}
+
 export {
-    fetchFoodhouseSetupStatus
+    fetchFoodhouseSetupStatus,
+    saveFoodhouse
 };
+
+/*
+
+    const formFields = new FormData();
+    formFields.append('name', formData.name);
+    formFields.append('logo', formData.logo);
+    const config = {
+        headers: {
+            'content-type': 'appl'
+        }
+    }
+ */
