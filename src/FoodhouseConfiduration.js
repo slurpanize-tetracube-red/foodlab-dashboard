@@ -2,11 +2,12 @@ import { createTheme } from "@mui/material";
 
 export const foodhouseProperties = {
     apiProtocol: 'http',
-    baseUrl: '192.168.1.187:8081'
+    authManagerServiceBaseUrl: '192.168.1.187:8090',
+    foodhouseServiceBaseUrl: '192.168.1.187:8081'
 };
 
 export const foodhouseConfiguration = {
-    apiBaseUrl: `${foodhouseProperties.apiProtocol}://${foodhouseProperties.baseUrl}`
+    apiBaseUrl: `${foodhouseProperties.apiProtocol}://${foodhouseProperties.foodhouseServiceBaseUrl}`
 };
 
 export const theme = createTheme({
