@@ -8,7 +8,9 @@ import {
 import SettingsIcon from '@mui/icons-material/Settings';
 import { useFoodhouseGeneralSetup } from "./FoodhouseGeneralSetupHooks";
 
-function FoodhouseGeneralSetup() {
+function FoodhouseGeneralSetup(props) {
+
+    const { foodhouseSetupCompletedFn } = props;
 
     const {
         foodhouseName,
@@ -57,7 +59,7 @@ function FoodhouseGeneralSetup() {
                     Foodhouse General Setup
                 </Typography>
 
-                <Box component="form" onSubmit={submitForm} noValidate sx={{mt: 1}}>
+                <Box component="form" onSubmit={(event) => submitForm(event, foodhouseSetupCompletedFn)} noValidate sx={{ mt: 1 }}>
                     <TextField
                         margin="normal"
                         required
@@ -67,7 +69,7 @@ function FoodhouseGeneralSetup() {
                         name="foodhouse-name"
                         autoComplete="email"
                         autoFocus
-                        sx={{mt: 4}}
+                        sx={{ mt: 4 }}
                         value={foodhouseName}
                         onChange={updateName}
                     />
@@ -87,7 +89,7 @@ function FoodhouseGeneralSetup() {
                         type="submit"
                         fullWidth
                         variant="contained"
-                        sx={{mt: 3, mb: 2}}
+                        sx={{ mt: 3, mb: 2 }}
                     >
                         Found Foodhouse
                     </Button>

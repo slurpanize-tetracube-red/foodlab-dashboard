@@ -5,6 +5,7 @@ import { fetchFoodhouseSetupStatus } from "../services/foodhouseServices";
 function useFoodhouseInit() {
 
     const [ shouldInitialized, setShouldInitialized ] = useState(false);
+    const [ adminInitialized, setAdminInitialized ] = useState(false);
     const navigation = useNavigate();
 
     useEffect(() => {
@@ -18,26 +19,30 @@ function useFoodhouseInit() {
     useEffect(() => {
         if (shouldInitialized) {
             navigation('/setup/general-setup')
+        } else if (!adminInitialized) {
+            navigation('/users/create')
         } else {
             navigation('/')
         }
-    }, [ navigation, shouldInitialized ]);
+    }, [ navigation, shouldInitialized, adminInitialized ]);
 
     useEffect(() => {
     }, []);
 
     return {
-        shouldInitialized
+        shouldInitialized,
+        setShouldInitialized,
+        adminInitialized
     };
 }
 
-function useUserAuthenticated(shouldInitialized) {
+function useUserAuthenticated(shouldInitialized, adminInitialized) {
 
     const [ userIsAuthenticated, setUserAuthenticated ] = useState(false);
     const navigation = useNavigate();
 
     const redirectUser = useCallback(() => {
-        if (shouldInitialized.shouldInitialized) {
+        if (shouldInitialized || !adminInitialized) {
             return;
         }
 
@@ -46,7 +51,7 @@ function useUserAuthenticated(shouldInitialized) {
         } else {
             navigation('/');
         }
-    }, [ navigation, shouldInitialized.shouldInitialized, userIsAuthenticated ]);
+    }, [ navigation, shouldInitialized, userIsAuthenticated ]);
 
     useEffect(() => {
         const authToken = window.localStorage.getItem('auth-token');
@@ -65,7 +70,7 @@ function useUserAuthenticated(shouldInitialized) {
 
 function useUIStateManagement() {
     const [ showFetchingBackdrop, setFetchingBackdrop ] = useState(false);
-    const [ fetchErrorMessage, setFetchErrorMessage] = useState( {
+    const [ fetchErrorMessage, setFetchErrorMessage ] = useState({
         visible: false,
         title: null,
         description: null

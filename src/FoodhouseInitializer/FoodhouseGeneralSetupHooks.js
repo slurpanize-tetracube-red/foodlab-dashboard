@@ -21,7 +21,7 @@ function useFoodhouseGeneralSetup() {
         setFoodhouseDescription(description);
     };
 
-    const submitForm = (event) => {
+    const submitForm = (event, whenFoodhouseSetupCompletedFn) => {
         event.preventDefault();
         const formData = {
             name: foodhouseName,
@@ -29,7 +29,11 @@ function useFoodhouseGeneralSetup() {
         }
         setFetchingBackdrop(true);
         saveFoodhouse(formData)
-            .then(() => setFetchingBackdrop(false))
+            .then(response => {
+                setFetchingBackdrop(false);
+                whenFoodhouseSetupCompletedFn(false);
+                window.localStorage.setItem('createdFoodhouse', JSON.stringify(response));
+            })
             .catch((error) => {
                 if (error.response && error.response.status === 400) {
                     setFetchErrorMessage({
