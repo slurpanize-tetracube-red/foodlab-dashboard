@@ -51,7 +51,7 @@ function useUserAuthenticated(shouldInitialized, adminInitialized) {
         } else {
             navigation('/');
         }
-    }, [ navigation, shouldInitialized, userIsAuthenticated ]);
+    }, [ navigation, shouldInitialized, userIsAuthenticated, adminInitialized ]);
 
     useEffect(() => {
         const authToken = window.localStorage.getItem('auth-token');
@@ -61,7 +61,7 @@ function useUserAuthenticated(shouldInitialized, adminInitialized) {
 
     useEffect(() => {
         redirectUser();
-    }, [ redirectUser, userIsAuthenticated ]);
+    }, [ redirectUser ]);
 
     return {
         userIsAuthenticated

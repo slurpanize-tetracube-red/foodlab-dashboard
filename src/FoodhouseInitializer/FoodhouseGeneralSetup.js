@@ -67,7 +67,6 @@ function FoodhouseGeneralSetup(props) {
                         id="foodhouse-name"
                         label="Your foodhouse name"
                         name="foodhouse-name"
-                        autoComplete="email"
                         autoFocus
                         sx={{ mt: 4 }}
                         value={foodhouseName}
