@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-export const FoodhouseAppUIContext = createContext({
+export const FoodlabAppUIContext = createContext({
     showFetchingBackdrop: false,
     setFetchingBackdrop: () => {
     },

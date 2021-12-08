@@ -6,18 +6,18 @@ import {
     Typography
 } from "@mui/material";
 import SettingsIcon from '@mui/icons-material/Settings';
-import { useFoodhouseGeneralSetup } from "./FoodhouseGeneralSetupHooks";
+import { useFoodlabGeneralSetup } from "./FoodlabGeneralSetupHooks";
 
-function FoodhouseGeneralSetup(props) {
+function FoodlabGeneralSetup(props) {
 
-    const { foodhouseSetupCompletedFn } = props;
+    const { foodlabSetupCompletedFn } = props;
 
     const {
-        foodhouseName,
+        foodlabName,
         updateName,
         updateDescription,
         submitForm
-    } = useFoodhouseGeneralSetup();
+    } = useFoodlabGeneralSetup();
 
     const styles = {
         box: {
@@ -56,30 +56,30 @@ function FoodhouseGeneralSetup(props) {
                 </Avatar>
 
                 <Typography component="h1" variant="h5">
-                    Foodhouse General Setup
+                    Foodlab General Setup
                 </Typography>
 
-                <Box component="form" onSubmit={(event) => submitForm(event, foodhouseSetupCompletedFn)} noValidate sx={{ mt: 1 }}>
+                <Box component="form" onSubmit={(event) => submitForm(event, foodlabSetupCompletedFn)} noValidate sx={{ mt: 1 }}>
                     <TextField
                         margin="normal"
                         required
                         fullWidth
-                        id="foodhouse-name"
-                        label="Your foodhouse name"
-                        name="foodhouse-name"
+                        id="foodlab-name"
+                        label="Your foodlab name"
+                        name="foodlab-name"
                         autoFocus
                         sx={{ mt: 4 }}
-                        value={foodhouseName}
+                        value={foodlabName}
                         onChange={updateName}
                     />
                     <TextField
                         margin="normal"
                         fullWidth
-                        name="foodhouse-description"
+                        name="foodlab-description"
                         label="Some note about you"
                         multiline
                         rows={5}
-                        id="foodhouse-description"
+                        id="foodlab-description"
                         autoComplete="current-password"
                         onChange={updateDescription}
                     />
@@ -90,7 +90,7 @@ function FoodhouseGeneralSetup(props) {
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
                     >
-                        Found Foodhouse
+                        Found Foodlab
                     </Button>
                 </Box>
             </Box>
@@ -98,7 +98,7 @@ function FoodhouseGeneralSetup(props) {
     )
 }
 
-export default FoodhouseGeneralSetup;
+export default FoodlabGeneralSetup;
 
 /*
    <Paper sx={styles.paper} elevation={3}>
@@ -121,15 +121,15 @@ export default FoodhouseGeneralSetup;
                                alignItems="center">
                             <Button color="primary" aria-label="edit" variant="outlined" sx={{mt: 1}}>
                                 <EditIcon/>
-                                <label htmlFor={'foodhouse-logo'}>
+                                <label htmlFor={'foodlab-logo'}>
                                     Upload your logo
                                 </label>
                             </Button>
                         </Stack>
                         <InputBase
                             fullWidth
-                            id="foodhouse-logo"
-                            name="foodhouse-logo"
+                            id="foodlab-logo"
+                            name="foodlab-logo"
                             type="file"
                             accept="image/*"
                             sx={{display: "none"}}

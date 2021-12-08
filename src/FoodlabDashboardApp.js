@@ -1,23 +1,23 @@
 import { Route, Routes } from "react-router-dom";
-import FoodhouseGeneralSetup from "./FoodhouseInitializer/FoodhouseGeneralSetup";
+import FoodlabGeneralSetup from "./FoodlabInitializer/FoodlabGeneralSetup";
 import Dashboard from "./Dashboard/Dashboard";
-import { useFoodhouseInit, useUIStateManagement, useUserAuthenticated } from "./FoodhouseApp/FoodhouseAppHooks";
-import { FoodhouseAppUIContext } from "./FoodhouseApp/FoodhouseAppUIContext";
+import { useFoodlabInit, useUIStateManagement, useUserAuthenticated } from "./FoodlabApp/FoodlabAppHooks";
+import { FoodlabAppUIContext } from "./FoodlabApp/FoodlabAppUIContext";
 import { Alert, AlertTitle, Backdrop, CircularProgress, Snackbar } from "@mui/material";
-import { theme } from "./FoodhouseConfiduration";
+import { theme } from "./FoodlabConfiguration";
 import { ThemeProvider } from "@emotion/react";
 import LookSettings from "./LookSettings/LookSettings";
 import CreateUser from "./UserManagement/CreateUser/CreateUser";
 
-function FoodhouseDashboardApp() {
+function FoodlabDashboardApp() {
 
-    const { shouldInitialized, setShouldInitialized, adminInitialized } = useFoodhouseInit()
+    const { shouldInitialized, setShouldInitialized, adminInitialized } = useFoodlabInit()
     useUserAuthenticated(shouldInitialized, adminInitialized)
     const uiStateManagement = useUIStateManagement();
 
     return (
         <ThemeProvider theme={theme}>
-            <FoodhouseAppUIContext.Provider value={uiStateManagement}>
+            <FoodlabAppUIContext.Provider value={uiStateManagement}>
                 <Backdrop
                     sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                     open={uiStateManagement.showFetchingBackdrop}
@@ -43,7 +43,7 @@ function FoodhouseDashboardApp() {
                     <Route path={'/'} element={<Dashboard/>}/>
                     <Route path={'/setup'}>
                         <Route path={'general-setup'}
-                               element={<FoodhouseGeneralSetup foodhouseSetupCompletedFn={setShouldInitialized}/>}/>
+                               element={<FoodlabGeneralSetup foodlabSetupCompletedFn={setShouldInitialized}/>}/>
                         <Route path={'look'} element={<LookSettings/>}/>
                     </Route>
                     <Route path={'/users'}>
@@ -54,9 +54,9 @@ function FoodhouseDashboardApp() {
                         <Route path={'login'} element={<h1>Login page</h1>}/>
                     </Route>
                 </Routes>
-            </FoodhouseAppUIContext.Provider>
+            </FoodlabAppUIContext.Provider>
         </ThemeProvider>
     );
 }
 
-export default FoodhouseDashboardApp;
+export default FoodlabDashboardApp;

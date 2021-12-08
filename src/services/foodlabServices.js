@@ -1,21 +1,21 @@
 import axios from "axios";
-import { foodhouseConfiguration } from "../FoodhouseConfiduration";
+import { foodlabConfiguration } from "../FoodlabConfiguration";
 
-async function fetchFoodhouseSetupStatus() {
-    const url = `${foodhouseConfiguration.apiBaseUrl}/foodhouse-api/foodhouse/setup/status`;
+async function fetchFoodlabSetupStatus() {
+    const url = `${foodlabConfiguration.apiBaseUrl}/foodlab-api/foodlab/setup/status`;
     const setupStatusResponse = await axios.get(url);
     return setupStatusResponse.data
 }
 
-async function saveFoodhouse(formData) {
-    const url = `${foodhouseConfiguration.apiBaseUrl}/foodhouse-api/foodhouse/setup/create`;
+async function saveFoodlab(formData) {
+    const url = `${foodlabConfiguration.apiBaseUrl}/foodlab-api/foodlab/setup/create`;
     const setupStatusResponse = await axios.post(url, formData);
     return setupStatusResponse.data
 }
 
 export {
-    fetchFoodhouseSetupStatus,
-    saveFoodhouse
+    fetchFoodlabSetupStatus,
+    saveFoodlab
 };
 
 /*

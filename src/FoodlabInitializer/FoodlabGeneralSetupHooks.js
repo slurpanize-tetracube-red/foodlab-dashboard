@@ -1,38 +1,38 @@
 import { useContext, useState } from "react";
-import { saveFoodhouse } from "../services/foodhouseServices";
-import { FoodhouseAppUIContext } from "../FoodhouseApp/FoodhouseAppUIContext";
+import { saveFoodlab } from "../services/foodlabServices";
+import { FoodlabAppUIContext } from "../FoodlabApp/FoodlabAppUIContext";
 
-function useFoodhouseGeneralSetup() {
+function useFoodlabGeneralSetup() {
 
-    const [ foodhouseName, setFoodhouseName ] = useState('');
-    const [ foodhouseDescription, setFoodhouseDescription ] = useState('');
+    const [ foodlabName, setFoodlabName ] = useState('');
+    const [ foodlabDescription, setFoodlabDescription ] = useState('');
     const {
         setFetchingBackdrop,
         setFetchErrorMessage
-    } = useContext(FoodhouseAppUIContext);
+    } = useContext(FoodlabAppUIContext);
 
     const updateName = (event) => {
         const name = event.target.value;
-        setFoodhouseName(name);
+        setFoodlabName(name);
     };
 
     const updateDescription = (event) => {
         const description = event.target.value;
-        setFoodhouseDescription(description);
+        setFoodlabDescription(description);
     };
 
-    const submitForm = (event, whenFoodhouseSetupCompletedFn) => {
+    const submitForm = (event, whenFoodlabSetupCompletedFn) => {
         event.preventDefault();
         const formData = {
-            name: foodhouseName,
-            description: foodhouseDescription
+            name: foodlabName,
+            description: foodlabDescription
         }
         setFetchingBackdrop(true);
-        saveFoodhouse(formData)
+        saveFoodlab(formData)
             .then(response => {
                 setFetchingBackdrop(false);
-                whenFoodhouseSetupCompletedFn(false);
-                window.localStorage.setItem('createdFoodhouse', JSON.stringify(response));
+                whenFoodlabSetupCompletedFn(false);
+                window.localStorage.setItem('createdFoodlab', JSON.stringify(response));
             })
             .catch((error) => {
                 if (error.response && error.response.status === 400) {
@@ -45,8 +45,8 @@ function useFoodhouseGeneralSetup() {
                 } else  if (error.response && error.response.status === 409) {
                     setFetchErrorMessage({
                         visible: true,
-                        title: 'Foodhouse exists',
-                        description: 'You have already created your foodhouse, now it\'s time to customize it'
+                        title: 'Foodlab exists',
+                        description: 'You have already created your foodlab, now it\'s time to customize it'
                     });
                     setFetchingBackdrop(false);
                 }
@@ -54,7 +54,7 @@ function useFoodhouseGeneralSetup() {
     };
 
     return {
-        foodhouseName,
+        foodlabName,
         updateName,
         updateDescription,
         submitForm
@@ -62,5 +62,5 @@ function useFoodhouseGeneralSetup() {
 }
 
 export {
-    useFoodhouseGeneralSetup
+    useFoodlabGeneralSetup
 }

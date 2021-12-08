@@ -1,17 +1,17 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { fetchFoodhouseSetupStatus } from "../services/foodhouseServices";
+import { fetchFoodlabSetupStatus } from "../services/foodlabServices";
 
-function useFoodhouseInit() {
+function useFoodlabInit() {
 
     const [ shouldInitialized, setShouldInitialized ] = useState(false);
     const [ adminInitialized, setAdminInitialized ] = useState(false);
     const navigation = useNavigate();
 
     useEffect(() => {
-        fetchFoodhouseSetupStatus()
-            .then(foodhouseSetupStatus => {
-                const {setupCompleted} = foodhouseSetupStatus;
+        fetchFoodlabSetupStatus()
+            .then(foodlabSetupStatus => {
+                const {setupCompleted} = foodlabSetupStatus;
                 setShouldInitialized(!setupCompleted);
             });
     }, []);
@@ -85,7 +85,7 @@ function useUIStateManagement() {
 }
 
 export {
-    useFoodhouseInit,
+    useFoodlabInit,
     useUserAuthenticated,
     useUIStateManagement
 }
